@@ -1,38 +1,38 @@
 import java.util.Scanner;
-public class Main {
+public class Main{
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         while(sc.hasNext()) {
-            //×ÜÈËÊı
+            //æ€»äººæ•°
             int n = sc.nextInt();
-            //Ñ§ÉúÄÜÁ¦ÖµÊı×é£¬µÚi¸öÈËÖ±½Ó¶ÔÓ¦arr[i]
+            //å­¦ç”Ÿèƒ½åŠ›å€¼æ•°ç»„ï¼Œç¬¬iä¸ªäººç›´æ¥å¯¹åº”arr[i]
             int[] arr = new int[n + 1];
-            //³õÊ¼»¯
-            for (int i = 1; i <= n; i++) {//ÈËÖ±½Ó¶ÔÓ¦×ø±ê
+            //åˆå§‹åŒ–
+            for (int i = 1; i <= n; i++) {//äººç›´æ¥å¯¹åº”åæ ‡
                 arr[i] = sc.nextInt();
             }
-            //Ñ¡ÔñµÄÑ§ÉúÊı
+            //é€‰æ‹©çš„å­¦ç”Ÿæ•°
             int kk = sc.nextInt();
-            //¼ä¾à
+            //é—´è·
             int dd = sc.nextInt();
 
             /**
-             * µİÍÆµÄÊ±ºò£¬ÒÔf[one][k]µÄĞÎÊ½±íÊ¾
-             * ÆäÖĞ£ºone±íÊ¾×îºóÒ»¸öÈËµÄÎ»ÖÃ£¬kÎª°üÀ¨Õâ¸öÈË£¬Ò»¹²ÓĞk¸öÈË
-             * Ô­ÎÊÌâºÍ×ÓÎÊÌâµÄ¹ØÏµ£ºf[one][k]=max{f[left][k-1]*arr[one],g[left][k-1]*arr[one]}
+             * é€’æ¨çš„æ—¶å€™ï¼Œä»¥f[one][k]çš„å½¢å¼è¡¨ç¤º
+             * å…¶ä¸­ï¼šoneè¡¨ç¤ºæœ€åä¸€ä¸ªäººçš„ä½ç½®ï¼Œkä¸ºåŒ…æ‹¬è¿™ä¸ªäººï¼Œä¸€å…±æœ‰kä¸ªäºº
+             * åŸé—®é¢˜å’Œå­é—®é¢˜çš„å…³ç³»ï¼šf[one][k]=max{f[left][k-1]*arr[one],g[left][k-1]*arr[one]}
              */
-            //¹æ»®Êı×é
-            long[][] f = new long[n + 1][kk + 1];//ÈËÖ±½Ó¶ÔÓ¦×ø±ê,nºÍkk¶¼Òª+1
+            //è§„åˆ’æ•°ç»„
+            long[][] f = new long[n + 1][kk + 1];//äººç›´æ¥å¯¹åº”åæ ‡,nå’Œkkéƒ½è¦+1
             long[][] g = new long[n + 1][kk + 1];
-            //³õÊ¼»¯k=1µÄÇé¿ö
+            //åˆå§‹åŒ–k=1çš„æƒ…å†µ
             for(int one = 1;one<=n;one++){
                 f[one][1] = arr[one];
                 g[one][1] = arr[one];
             }
-            //×Ôµ×ÏòÉÏµİÍÆ
+            //è‡ªåº•å‘ä¸Šé€’æ¨
             for(int k=2;k<=kk;k++){
                 for(int one = k;one<=n;one++){
-                    //Çó½âµ±oneºÍk¶¨µÄÊ±ºò£¬×î´óµÄ·Ö¸îµã
+                    //æ±‚è§£å½“oneå’Œkå®šçš„æ—¶å€™ï¼Œæœ€å¤§çš„åˆ†å‰²ç‚¹
                     long tempmax = Long.MIN_VALUE;
                     long tempmin = Long.MAX_VALUE;
                     for(int left = Math.max(k-1,one-dd);left<=one-1;left++){
@@ -47,7 +47,7 @@ public class Main {
                     g[one][k] = tempmin;
                 }
             }
-            //nÑ¡k×î´óµÄĞèÒª´Ó×îºóÒ»¸ö×î´óµÄÎ»ÖÃÑ¡
+            //né€‰kæœ€å¤§çš„éœ€è¦ä»æœ€åä¸€ä¸ªæœ€å¤§çš„ä½ç½®é€‰
             long result = Long.MIN_VALUE;
             for(int one = kk;one<=n;one++){
                 if(result<f[one][kk]){
